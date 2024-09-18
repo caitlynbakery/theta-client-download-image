@@ -2,6 +2,8 @@
 
 This demo showcases the [THETA Client SDK](https://github.com/ricohapi/theta-client) modified with the tutorial linked [here](https://community.theta360.guide/t/download-images-from-url-using-react-native-and-theta-client/9800) to download images on local storage. The tutorial showcased how to download images using a fake THETA API, while this repo uses a physical THETA camera on an Android device. The new files additions and modifications are mainly in the `src` folder inside the `demo-react-native` directory.
 
+The test was done using a physical device RICOH THETA Z1 connected to a physical device Android Phone with WiFi.  The Android phone is a Moto Power 5G 2024.
+
 ## Run Project
 * Clone project
 * cd into `demos` → `demo-react-native` 
