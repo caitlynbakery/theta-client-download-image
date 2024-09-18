@@ -39,6 +39,8 @@ I added the two packages: [react-native-blob-util](https://github.com/RonRadtke/
 
 Also, the first time you use the physical camera, reset the camera date settings so it appears in camera roll chronologically (take picture with official RICOH app so it sets time).
 
-![download](readme_assets/download.gif)
+The final result is shown here:
+
+![download](readme_assets/download.gif) ![view-photo](readme_assets/view-photo.gif)
 
     
