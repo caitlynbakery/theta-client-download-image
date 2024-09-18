@@ -19,7 +19,8 @@ import {
 // import card modules from React-Native-Paper
 import { Avatar, Button, Card, Text as Tex } from 'react-native-paper';
 import SkeletonCardLoader from './SkeletonCardLoader';
-
+import ReactNativeBlobUtil from 'react-native-blob-util';
+import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 
 const listPhotos = async () => {
   const {fileList} = await listFiles(FileTypeEnum.IMAGE, 0, 1000);
@@ -49,38 +50,30 @@ const ListPhotos = ({navigation}) => {
     ]);
 
     console.log('granted', granted);
-    downloadImage(url);
+    downloadPhoto(url);
 
     return granted;
   };
 
-  const downloadImage = async (url: any) => {  
-    // Define the path where you want to save the file
-    const { config, fs } = RNFetchBlob;
-    const downloads = fs.dirs.DownloadDir;
-    const path = `${downloads}/image_${Date.now()}.jpg`;
-
-    // Start downloading the image
-    config({
-        fileCache: true,
-        addAndroidDownloads: {
-          useDownloadManager: true,
-          notification: true,
-          path: path,
-          description: 'Downloading image',
-        },
-    })
-    .fetch('GET', url)
-    .then((res) => {
-        console.log('The file is saved to:', res.path());
-        Alert.alert(`Image downloaded successfully to: ${res.path()}`);
-        navigation.navigate('dataCenter', { imagePath: res.path() });
-    })
-    .catch((error) => {
-        console.error('Error downloading image:', error);
-        Alert.alert(`Failed to download image due to: ${error}`);
-    });
-  };
+    const downloadPhoto = async (url: any) => {
+        ReactNativeBlobUtil.config({
+            fileCache: true,
+            // appendExt: 'png',
+            appendExt: 'jpg',
+            })
+            .fetch('GET', url)
+            .then(res => {
+                let localFilePath = res.path()
+                console.log('resource path: ',localFilePath);
+                let result = CameraRoll.saveAsset(localFilePath, {type: 'photo', album: 'THETA'});
+                console.log('saved', result)
+                Alert.alert(`Image downloaded successfully to: ${result}`);
+                navigation.navigate('dataCenter', { imagePath: localFilePath });
+            })
+            .catch(error => {
+                console.log(error);
+                Alert.alert(`Failed to download image due to: ${error}`);});
+  }
 
   useEffect(() => {
     const init = async () => {
