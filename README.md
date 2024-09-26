@@ -40,7 +40,7 @@ I added the two packages: [react-native-blob-util](https://github.com/RonRadtke/
 
 <img src="readme_assets/downloadphoto.png">
 
-Also, the first time you use the physical camera, reset the camera date settings so it appears in camera roll chronologically (take picture with official RICOH app so it sets time).
+Also, the first time you use the physical camera, [set the camera date](https://github.com/ricohapi/theta-api-specs/blob/main/theta-web-api-v2.1/options/date_time_zone.md)  so it appears in camera roll chronologically. If you take a picture with official RICOH app, it will set the time using the time on the mobile phone.
 
 The final result is shown here:
 
